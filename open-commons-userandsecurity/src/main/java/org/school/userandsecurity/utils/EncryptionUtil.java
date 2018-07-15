@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.crypto.BadPaddingException;
@@ -18,7 +19,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.inject.Inject;
 
-import org.openframework.common.rest.service.MessageResourceAS;
+import org.openframework.commons.config.service.as.MessageResourceAS;
 import org.openframework.commons.constants.CommonConstants;
 import org.school.userandsecurity.constant.EncryptionConstants;
 import org.school.userandsecurity.constant.UserSecurityConstants;
@@ -33,11 +34,11 @@ public class EncryptionUtil {
 	final Logger logger = LoggerFactory.getLogger(EncryptionUtil.class);
 
 	@Inject
-	MessageResourceAS messageResourceAS;
+	Optional<MessageResourceAS> messageResourceAS;
 
 	public String encrypt(String toBeEncrypt) {
 
-		Properties properties = messageResourceAS.getAppConfigsMap().get(UserSecurityConstants.ENCRYPTION);
+		Properties properties = getProperties();
 		return encrypt(toBeEncrypt, properties);
 	}
 
@@ -127,7 +128,19 @@ public class EncryptionUtil {
 
 	public String decrypt(String encrypted) {
 
-		Properties properties = messageResourceAS.getAppConfigsMap().get(UserSecurityConstants.ENCRYPTION);
+		Properties properties = getProperties();
 		return decrypt(encrypted, properties);
+	}
+
+	private Properties getProperties() {
+
+		Properties properties = null;
+		if(messageResourceAS.isPresent()) {
+			properties = messageResourceAS.get().getAppConfigsMap().get(UserSecurityConstants.ENCRYPTION);
+		} else {
+			// TODO provide default properties if not found in messageResourceAS
+			properties = new Properties();
+		}
+		return properties;
 	}
 }

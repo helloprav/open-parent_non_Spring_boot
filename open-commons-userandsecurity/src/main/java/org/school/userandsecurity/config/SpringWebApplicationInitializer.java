@@ -9,7 +9,11 @@ import org.openframework.common.rest.SwaggerConfig;
 import org.openframework.common.rest.constants.ApplicationConstants;
 import org.openframework.common.rest.filter.StatelessSecurityFilter;
 import org.openframework.common.rest.filter.TracerFilter;
+import org.openframework.commons.config.GlobalConfigSpringMvcWebConfig;
+import org.openframework.commons.config.GlobalConfigSpringRootContextConfig;
+import org.openframework.commons.config.GlobalConfigWebApplicationInitializer;
 import org.openframework.commons.spring.SpringAopConfig;
+import org.openframework.commons.spring.utils.LoggingBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.ContextLoaderListener;
@@ -46,7 +50,8 @@ public class SpringWebApplicationInitializer extends AbstractAnnotationConfigDis
 
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		// configuration class for root context
-		rootContext.register(SpringRestWebConfig.class, SpringAopConfig.class, TransactionManagementConfig.class);
+		rootContext.register(SpringAopConfig.class, TransactionManagementConfig.class, LoggingBean.class,
+				GlobalConfigSpringRootContextConfig.class);
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 
 		// dispatcher servlet for springRestWebApplicationContext
@@ -57,6 +62,9 @@ public class SpringWebApplicationInitializer extends AbstractAnnotationConfigDis
 
 		// configure security filters
 		configureSecurityFilters(servletContext);
+
+		// configure global config module
+		GlobalConfigWebApplicationInitializer.configureSecurityServlet(servletContext);
 	}
 
 	private void configureSecurityFilters(ServletContext servletContext) {
@@ -81,7 +89,8 @@ public class SpringWebApplicationInitializer extends AbstractAnnotationConfigDis
 
 		AnnotationConfigWebApplicationContext springRestWebApplicationContext = new AnnotationConfigWebApplicationContext();
 		springRestWebApplicationContext.setParent(rootContext);
-		springRestWebApplicationContext.register(SpringRestWebConfig.class, SwaggerConfig.class);
+		springRestWebApplicationContext.register(SpringRestWebConfig.class, SwaggerConfig.class,
+				GlobalConfigSpringMvcWebConfig.class);
 		ServletRegistration.Dynamic restEntryPoint = servletContext.addServlet("dispatcherRest",
 				new DispatcherServlet(springRestWebApplicationContext));
 		restEntryPoint.setLoadOnStartup(1);

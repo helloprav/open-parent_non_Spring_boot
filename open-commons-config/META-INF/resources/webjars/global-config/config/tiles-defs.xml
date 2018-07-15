@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- Section for Base definition -->
+	<definition name="base.definition" template="/webjars/global-config/tiles/layout.jsp">
+		<put-attribute name="header" value="/webjars/global-config/tiles/header.jsp" />
+		<put-attribute name="menu" value="/webjars/global-config/tiles/menu.jsp" />
+		<put-attribute name="footer" value="/webjars/global-config/tiles/footer.jsp" />
+	</definition>
+
+	<!-- Manage Login Tiles Definition -->
+	<definition name="homeTiles" extends="base.definition">
+		<put-attribute name="title" value="Home Page" type="string"/>
+		<put-attribute name="body" value="/webjars/global-config/jsp/home.jsp" type="template"/>
+	</definition>
+
+</tiles-definitions>

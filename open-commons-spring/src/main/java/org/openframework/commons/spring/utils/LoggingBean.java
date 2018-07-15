@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -23,10 +24,14 @@ public class LoggingBean implements InitializingBean {
 	@Autowired
 	private Environment env;
 
+	@Autowired
+	protected ApplicationContext ctx;
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		logger.info("=================================================================");
 		try {
+			logSpringBeans();
 			logEnvVariables();
 			logActiveSpringProfiles();
 			logReleventProperties();
@@ -34,6 +39,14 @@ public class LoggingBean implements InitializingBean {
 			logger.error("LoggingBean failed: " + e.getMessage());
 		}
 		logger.info("=================================================================");
+	}
+
+	private void logSpringBeans() {
+		System.out.println("\n\n\nPrinting all bean names::::::::"+ ctx);
+		int i =0;
+	    for(String beanName : ctx.getBeanDefinitionNames()){
+	        System.out.println(++i + "  "+beanName);
+	    }
 	}
 
 	private void logEnvVariables() {

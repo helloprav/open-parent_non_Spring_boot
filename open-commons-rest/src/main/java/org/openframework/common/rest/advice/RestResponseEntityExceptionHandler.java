@@ -17,7 +17,7 @@ import org.openframework.common.rest.Constants;
 import org.openframework.common.rest.beans.ErrorBean;
 import org.openframework.common.rest.beans.ResponseBean;
 import org.openframework.common.rest.exception.KeywordNotFoundException;
-import org.openframework.common.rest.service.MessageResourceAS;
+import org.openframework.commons.config.service.as.MessageResourceAS;
 import org.openframework.commons.domain.exceptions.ApplicationRuntimeException;
 import org.openframework.commons.domain.exceptions.ApplicationValidationException;
 import org.openframework.commons.domain.exceptions.AuthenticationException;

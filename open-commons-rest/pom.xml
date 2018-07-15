@@ -26,6 +26,10 @@
 			<groupId>org.openframework</groupId>
 			<artifactId>open-commons</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.openframework</groupId>
+			<artifactId>open-commons-config-stub</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
