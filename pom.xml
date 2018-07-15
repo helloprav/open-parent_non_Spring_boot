@@ -59,6 +59,21 @@
 				<artifactId>open-commons-jpa</artifactId>
 				<version>${version.project}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.openframework</groupId>
+				<artifactId>open-commons-config-stub</artifactId>
+				<version>${version.project}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openframework</groupId>
+				<artifactId>open-commons-config</artifactId>
+				<version>${version.project}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openframework</groupId>
+				<artifactId>open-commons-userandsecurity</artifactId>
+				<version>${version.project}</version>
+			</dependency>
 
 			<!-- Servlet Dependency -->
 			<dependency>
@@ -67,12 +82,49 @@
 				<version>3.1.0</version>
 				<scope>provided</scope>
 			</dependency>
+	        <dependency>
+	            <groupId>javax.servlet.jsp</groupId>
+	            <artifactId>javax.servlet.jsp-api</artifactId>
+	            <version>2.3.1</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>javax.servlet</groupId>
+	            <artifactId>jstl</artifactId>
+	            <version>1.2</version>
+	        </dependency>
 			<!-- @Inject -->
 			<dependency>
 				<groupId>javax.inject</groupId>
 				<artifactId>javax.inject</artifactId>
 				<version>1</version>
 			</dependency>
+	
+	        <!-- Apache Tiles -->
+	        <dependency>
+	            <groupId>org.apache.tiles</groupId>
+	            <artifactId>tiles-core</artifactId>
+	            <version>${apachetiles.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.tiles</groupId>
+	            <artifactId>tiles-api</artifactId>
+	            <version>${apachetiles.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.tiles</groupId>
+	            <artifactId>tiles-servlet</artifactId>
+	            <version>${apachetiles.version}</version>
+	        </dependency>
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-jsp</artifactId>
+                <version>${apachetiles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-template</artifactId>
+                <version>${apachetiles.version}</version>
+            </dependency>
 
 			<!-- Validation API JARs listed below -->
 			<!-- JSR 303 -->
@@ -320,5 +372,7 @@
 		<module>open-commons-jpa</module>
 		<module>open-commons-spring</module>
 		<module>open-commons-userandsecurity</module>
+		<module>open-commons-config</module>
+		<module>open-commons-config-stub</module>
 	</modules>
 </project>
