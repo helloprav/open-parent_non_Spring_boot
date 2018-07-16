@@ -1,7 +1,13 @@
-1. Remove context hard-coding from project open-commons-config.
-2. Dynamic forward in Security Servlet corresponding to the Spring Dispatcher Servlet URL pattern/mapping.
-3. Split open-commons-rest into multiple small projects
-4. Move printing of all servlet into utility method in appropriate project.
-5. Test, Run and Push open-gui project
-6. Remove un wanted files from open-gui
-7. 
+===============================COMPLETED LIST===========================================================
+===============================TODO LIST================================================================
+5. HealthCheck Status of all micro services: to be displayed on the GUI
+7. Centralized location for all services -> log files
+8. MicroService Caching
+========================================================================================================
+========================================================================================================
+9. Service Discovery - Eureka
+10.Load Balancing
+11.API Gateway
+========================================================================================================
+Use cases for the MicroServices
+Domain Driven Design - Talk to Arun

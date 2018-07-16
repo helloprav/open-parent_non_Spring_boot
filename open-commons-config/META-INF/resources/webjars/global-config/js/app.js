@@ -66,7 +66,7 @@ function setLogLevel() {
 
 	if (levels != undefined && levels.length > 0) {
 
-		var url = '/user-security-web/app/logger?levels=' + levels + '&logger=' + logger;
+		var url = getContextPath()+'/app/logger?levels=' + levels + '&logger=' + logger;
 		$
 				.ajax({
 					type : "POST",
@@ -91,7 +91,7 @@ function loadMessages() {
 		return false;
 	}
 	var messageType = $("#messageType").val();
-	var url = '/user-security-web/app/messages/'+messageType+'/'+selectedLanguage;
+	var url = getContextPath()+'/app/messages/'+messageType+'/'+selectedLanguage;
 	$.ajax({
 		type : 'GET',
 		url : url,
@@ -112,7 +112,7 @@ function loadMessages() {
 function saveMessage(index, action) {
 	var selectedLanguage = $("#selectLanguage").find( "option:selected" ).prop("value");
 	var messageType = $("#messageType").val();
-	var url = '/user-security-web/app/messages/'+messageType+'/'+selectedLanguage;
+	var url = getContextPath()+'/app/messages/'+messageType+'/'+selectedLanguage;
 	var key1 = $("#key"+index).val();
 	var value1 = $("#textArea"+index).val();
 
@@ -123,7 +123,7 @@ function saveMessage(index, action) {
 function saveConfig(index, action) {
 
 	var configName = $("#configName").val();
-	var url = '/user-security-web/app/config/'+configName;
+	var url = getContextPath()+'/app/config/'+configName;
 	var key1 = $("#key"+index).val();
 	var value1 = $("#textArea"+index).val();
 
@@ -175,4 +175,9 @@ function showAlertDialog(msg) {
 		confirmValue : 'OK',
 		content : msg
 	});
+}
+
+function getContextPath(){
+	var path =window.location.pathname;
+	return path.substring(0,path.indexOf('/',1));
 }

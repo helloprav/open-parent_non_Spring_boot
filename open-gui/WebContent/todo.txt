@@ -1,7 +1,9 @@
-1. Remove context hard-coding from project open-commons-config.
+================================TODO LIST================================================================================
 2. Dynamic forward in Security Servlet corresponding to the Spring Dispatcher Servlet URL pattern/mapping.
 3. Split open-commons-rest into multiple small projects
 4. Move printing of all servlet into utility method in appropriate project.
+================================COMPLETED LIST============================================================================
+1. Remove context hard-coding from project open-commons-config.
 5. Test, Run and Push open-gui project
 6. Remove un wanted files from open-gui
 7. gui project - users list - role drop down
