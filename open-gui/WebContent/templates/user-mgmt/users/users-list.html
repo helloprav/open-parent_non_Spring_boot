@@ -1,0 +1,47 @@
+<table class="table table-hover table-striped table-bordered table-responsive123">
+    <thead>
+    	<tr>
+    		<td colspan="7">
+				<div class="btn-group">
+  					Displaying: <b>{{selectedRole.value}}</b>          Please Select User Role &nbsp;
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Roles</button>
+					<ul class="dropdown-menu">
+						<li class="dropdown active">
+							<a class="dropdown-item open" href="#/user-mgmt/users/list/all">all</a>
+						</li>
+						<li ng-repeat="role in userRoles" class="dropdown">
+							<a class="dropdown-item" href="#/user-mgmt/users/list/{{role}}">{{role}}</a>
+						</li>
+					</ul>
+				</div>
+
+				<div align="right" class="btn-group-vertical float-right">
+					<a href="#/user-mgmt/users/new"><button
+							type="button" class="btn btn-primary">Create</button></a>
+				</div>
+    		</td>
+    	</tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Gender</td>
+            <td>Email</td>
+            <td>Role</td>
+            <td>Description</td>
+            <td>Action</td>
+        </tr>
+        <tr ng-repeat="entity in entityList">
+            <td><a href="#/user-mgmt/users/{{ entity.id }}/view">{{ entity.id }}</a></td>
+            <td>{{ entity.firstName }} {{lastName}}</td>
+            <td>{{ entity.gender }}</td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.role }}</td>
+            <td>{{ entity.description }}</td>
+            <td><a href="#/user-mgmt/users/{{ entity.id }}/edit">EDIT</a> | DELETE</td>
+        </tr>
+        
+    </tbody>
+</table>

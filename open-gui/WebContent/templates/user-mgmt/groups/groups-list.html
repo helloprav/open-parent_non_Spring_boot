@@ -1,0 +1,23 @@
+<table class="table table-hover table-striped table-bordered table-responsive">
+    <thead>
+        <tr>
+            <td colspan="4" align="right"><a href="#/group-mgmt/groups/new"><button
+				type="button" class="btn btn-primary">Create</button></a></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Action</td>
+        </tr>
+        <tr ng-repeat="entity in entityList">
+            <td><a href="#/group-mgmt/groups/{{ entity.id }}/view">{{ entity.id }}</a></td>
+            <td>{{ entity.groupName }}</td>
+            <td>{{ entity.description }}</td>
+            <td><a href="#/group-mgmt/groups/{{ entity.id }}/edit">EDIT</a> | DELETE</td>
+        </tr>
+
+    </tbody>
+</table>
