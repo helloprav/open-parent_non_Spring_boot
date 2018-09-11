@@ -11,6 +11,9 @@
     <!-- CSS (load bootstrap) -->
     <!-- <link rel="stylesheet" href="3rdparty/bootstrap/3.3.2/css/bootstrap.css"> -->
     <!-- <link rel="stylesheet" href="3rdparty/fonts/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <link rel="stylesheet" href="3rdparty/fonts/font-awesome/v5.3.1/css/all.min.css" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css" crossorigin="anonymous">
+
     <style>
         .navbar { border-radius:0; }
         .selector-for-some-widget {
@@ -19,12 +22,12 @@
         /* .w-auto { width: auto; } */
     </style>
 
-    <!-- JS (load in order => angular, ui-router, and our custom js file) -->
-    <script src="3rdparty/angularjs/1.2.13/angular.js"></script>
-    <script src="3rdparty/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <!-- JS (load in order => angular, ui-router, and our custom js file) import order changed -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="3rdparty/angularjs/1.2.13/angular.js"></script>
+    <script src="3rdparty/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
 
     <script src="js/app.js"></script>
 
@@ -71,7 +74,7 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">User Management</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" ui-sref="user-mgmt.users.list">Users</a> <a
+						<a class="dropdown-item" ui-sref="user-mgmt.users.list({role: 'all'})">Users</a> <a
 							class="dropdown-item" ui-sref="group-mgmt.groups.list">Groups</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Something else here</a>
@@ -81,7 +84,7 @@
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
+					placeholder="Search" aria-label="Search" ng-model="searchText">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
 			<ul class="navbar-nav mr-auto">
@@ -101,18 +104,24 @@
 					</div></li>
 			</ul>
 		</div>
-	</nav>
+	</nav><br>
 
 	<!-- MAIN CONTENT -->
 <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
-<div class="container">
-    <div ui-view></div>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="container">
+		    <div ui-view></div>
+		</div>
+	</div>
 </div>
-
-<div class="text-center">
-    <p>A tutorial by <a href="http://scotch.io" target="_blank">scotch.io</a></p>
-    <p>View the tutorial: <a href="http://scotch.io/tutorials/javascript/angular-routing-using-ui-router" target="_blank">AngularJS Routing using UI-Router</a></p>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="text-center">
+		    <p>A tutorial by <a href="http://scotch.io" target="_blank">scotch.io</a></p>
+		    <p>View the tutorial: <a href="http://scotch.io/tutorials/javascript/angular-routing-using-ui-router" target="_blank">AngularJS Routing using UI-Router</a></p>
+		</div>
+	</div>
 </div>
-
 </body>
 </html>
