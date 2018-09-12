@@ -28,11 +28,19 @@ angular.module('routerApp')
 		o.getAll = function() {
 			console.log('getting all functions');
 		    	var url = userMgmtCtx+"/functions";
-			return $http.get(url).success(function(res) {
+	    	return $http({
+	    		  method: 'GET',
+	    		  url: url
+	    		}).then(function successCallback(res) {
+	    		    // this callback will be called asynchronously
+	    		    // when the response is available
+	    			console.log('functions.response:: '+JSON.stringify(res.data));
 			    	o.allFunctionList = [];
-				angular.copy(res.data, o.allFunctionList);
-				console.log('functions.response:: '+JSON.stringify(o.allFunctionList));
-			});
+					angular.copy(res.data.data, o.allFunctionList);
+	    		  }, function errorCallback(response) {
+	    		    // called asynchronously if an error occurs
+	    		    // or server returns response with an error status.
+	    		  });
 		};
 
 		o.create = function(user) {

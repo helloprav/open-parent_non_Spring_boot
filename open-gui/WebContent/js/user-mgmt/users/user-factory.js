@@ -16,6 +16,7 @@ angular.module('routerApp')
 		o.resetAll = function() {
 			console.log("reset All called");
 			o.configs = [];
+			o.entityList = [];
 			o.user = {};
 			o.alerts = [];
 			o.userRoles = [];
@@ -36,32 +37,69 @@ angular.module('routerApp')
 			console.log("initRoles called");
 			o.userRoles = [];
 		    	var url = userMgmtCtx+"/validvalues/userroles";
-			return $http.get(url).success(function(res) {
+		    	$http({
+	    		  method: 'GET',
+	    		  url: url
+	    		}).then(function successCallback(response) {
+	    		    // this callback will be called asynchronously
+	    		    // when the response is available
+					console.log("initRoles called: "+JSON.stringify(response.data));
+					angular.copy(response.data, o.userRoles);
+	    		  }, function errorCallback(response) {
+	    		    // called asynchronously if an error occurs
+	    		    // or server returns response with an error status.
+	    		  });
+		    	/*return $http.get(url).success(function(res) {
 				angular.copy(res, o.userRoles);
 				//o.userRoles.push("--Please Select--");
 				//o.userRoles.splice(0, 0, "--Please Select--");
 				console.log("initRoles called: "+JSON.stringify(o.userRoles));
-			})
+			})*/
 		}
 
 		function initGenders() {
 			console.log("initGenders called");
 			o.userGenders = [];
-		    	var url = userMgmtCtx+"/validvalues/genders";
-			return $http.get(url).success(function(res) {
+	    	var url = userMgmtCtx+"/validvalues/genders";
+	    	$http({
+	    		  method: 'GET',
+	    		  url: url
+	    		}).then(function successCallback(response) {
+	    		    // this callback will be called asynchronously
+	    		    // when the response is available
+					angular.copy(response.data, o.userGenders);
+					console.log("initGenders called: "+JSON.stringify(o.userGenders));
+	    		  }, function errorCallback(response) {
+	    		    // called asynchronously if an error occurs
+	    		    // or server returns response with an error status.
+	    		  });
+			/*return $http.get(url).success(function(res) {
 				angular.copy(res, o.userGenders);
 				console.log("initGenders called: "+JSON.stringify(o.userGenders));
-			})
+			})*/
 		}
 
 		o.get = function(id) {
 			console.log("get called for id:"+id);
 		    	var url = userMgmtCtx+"/users/"+id;
-			return $http.get(url).success(function(res) {
+		    	$http({
+	    		  method: 'GET',
+	    		  url: url
+	    		}).then(function successCallback(res) {
+	    		    // this callback will be called asynchronously
+	    		    // when the response is available
+	    			console.log("user retrieved for id:"+JSON.stringify(res.data.data));
+					angular.copy(res.data.data, o.user);
+					o.user.myrole=o.user.role;
+    		    }, function errorCallback(response) {
+	    		    // called asynchronously if an error occurs
+	    		    // or server returns response with an error status.
+    		    });
+		    	/*return $http.get(url).success(function(res) {
 				angular.copy(res.data, o.user);
 				o.user.myrole=o.user.role;
 				console.log("user retrieved for id:"+JSON.stringify(res));
-			})
+			})*/
 		};
 
 		o.getAll = function() {
@@ -80,12 +118,21 @@ angular.module('routerApp')
 		    	if(role != 'all') {
 		    	    url = url+"/roles/"+role;
 		    	}
-			return $http.get(url).success(function(data) {
-				o.configs = [];
-				angular.copy(data, o.configs);
-				angular.copy(data, o.entityList);
-				console.log('getting all users for data: '+o.entityList.data);
-			});
+		    	return $http({
+	    		  method: 'GET',
+	    		  url: url
+	    		}).then(function successCallback(response) {
+	    		    // this callback will be called asynchronously
+	    		    // when the response is available
+	    			// console.log('getting all users for data: '+JSON.stringify(response.data.data));
+					o.entityList = [];
+					angular.copy(response.data, o.entityList);
+					console.log("getAllUsers: "+JSON.stringify(response.data));
+					console.log("getAllUsers: "+JSON.stringify(o.entityList.data));
+	    		  }, function errorCallback(response) {
+	    		    // called asynchronously if an error occurs
+	    		    // or server returns response with an error status.
+	    		  });
 		};
 
 		o.create = function(user) {
@@ -98,7 +145,20 @@ angular.module('routerApp')
 				user.active = false;
 			}
 			
-			return $http.post(userMgmtCtx+'/users', user)
+			return $http({
+				  method: 'POST',
+				  url: userMgmtCtx+'/users',
+				  data: user
+				}).then(function successCallback(response) {
+				    // this callback will be called asynchronously
+				    // when the response is available
+					o.setAlert("success", "Successfully created config!");
+					$state.go('user-mgmt.users');				
+				  }, function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				  });
+			/*return $http.post(userMgmtCtx+'/users', user)
 			.success(function(data) {
 				o.setAlert("success", "Successfully created user!");
 
@@ -107,11 +167,25 @@ angular.module('routerApp')
 			.error(function(data, status, headers, user) {
 				console.log("Error creating! status = "+status+", data = "+JSON.stringify(data));
 				o.setAlert("danger", "Error creating user!");
-			});
+			});*/
 		}
 
-		o.update = function(config) {
-			console.log("Updating User: "+JSON.stringify(config));
+		o.update = function(user) {
+			console.log("Updating User: "+JSON.stringify(user));
+			return $http({
+				  method: 'PUT',
+				  url: userMgmtCtx+'/users/'+user.id,
+				  data: user
+				}).then(function successCallback(response) {
+				    // this callback will be called asynchronously
+				    // when the response is available
+					o.setAlert("success", "Successfully updated config!");
+					$state.go('user-mgmt.users.list');
+				  }, function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				  });
+			/*
 			return $http.put(userMgmtCtx+'/users/'+config.id, config)
 			.success(function(data) {
 				o.setAlert("success", "Successfully updated config!");
@@ -121,7 +195,7 @@ angular.module('routerApp')
 			.error(function(data, status) {
 				console.log("Error updating! status = "+status+", data = "+data);
 				o.setAlert("danger", "Error updating config!");
-			});
+			});	*/
 		}
 		
 		o.delete = function(id) {

@@ -7,7 +7,7 @@
 			<div class="ml-auto">
 				<a href="#/user-mgmt/users/{{user.id}}/edit"><button
 						type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> EDIT</button></a> <a
-					href="#/user-mgmt/users/list/"><button type="button"
+					ui-sref="user-mgmt.users.list({role: '{{user.role}}'})" ><button type="button"
 						class="btn btn-primary">BACK</button></a>
 			</div>
 		</div>

@@ -2,6 +2,11 @@ var userMgmtCtx = "/user-security-web/api";
 
 var routerApp = angular.module('routerApp', ['ui.router']);
 
+routerApp.config([ '$locationProvider', function($locationProvider) {
+	// The following will remove any ! from URL (changing from #! -> #)
+	$locationProvider.hashPrefix('');
+} ]);
+
 routerApp.config(function($stateProvider, $urlRouterProvider) {
     
     $urlRouterProvider.otherwise('/login');

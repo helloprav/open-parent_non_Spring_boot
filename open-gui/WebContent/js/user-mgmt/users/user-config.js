@@ -3,7 +3,7 @@
  */
 routerApp.config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/login');
+    //$urlRouterProvider.otherwise('/login');
 
     $stateProvider
 
@@ -24,6 +24,11 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/list/{role}',
             templateUrl: 'templates/user-mgmt/users/users-list.html',
             controller: 'UsersController',
+            params: {
+            	role: {
+            		value: 'all'
+            	}
+            },
             resolve: {
             	configsPromise: ['configFactory', '$stateParams', function(configFactory, $stateParams) {
 

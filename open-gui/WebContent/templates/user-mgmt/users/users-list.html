@@ -35,7 +35,8 @@
 							<tr>
 								<th class="hidden-xs">ID</th>
 								<th>Name</th>
-								<td>Role</td>
+								<th>Role</td>
+								<th>Gender</td>
 								<th>Email</th>
 								<th><em class="fa fa-cog"></em></th>
 							</tr>
@@ -49,6 +50,7 @@
 								<td><a href="#/user-mgmt/users/{{ entity.id }}/view">{{
 										entity.id }}</a></td>
 								<td>{{ entity.firstName }} {{lastName}}</td>
+								<td>{{ entity.role }}</td>
 								<td>{{ entity.gender }}</td>
 								<td>{{ entity.email }}</td>
 								<td align="center"><a class="btn btn-primary btn-xs"
