@@ -117,3 +117,26 @@ routerApp.controller('NavCtrl', [
 		
 	}
 ])// end nav controller
+
+// The below code is executed once when angularjs is started
+routerApp.run(['$http', '$rootScope', function($http, $rootScope) {
+	console.log("routerApp is starting");
+	$rootScope.entityStatus =['active', 'inactive'];
+
+	$rootScope.globalFn = function() {
+	   alert('This function is available in all scopes, and views');
+	}
+}])
+
+// The below code/factory is used to set the header name on item-header.html template
+routerApp.factory('Page', function() {
+	var title = 'default';
+	return {
+		title : function() {
+			return title;
+		},
+		setTitle : function(newTitle) {
+			title = newTitle
+		}
+	};
+});

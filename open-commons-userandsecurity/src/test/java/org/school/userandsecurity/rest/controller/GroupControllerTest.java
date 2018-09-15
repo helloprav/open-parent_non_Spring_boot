@@ -56,7 +56,19 @@ public class GroupControllerTest extends BaseControllerTest {
 
 	@Test
 	public void testFindGroups() throws Exception {
-		mockMvc.perform(get("/groups").param("page", "0").accept(SUPPORTED_CONTENT_TYPE)).andExpect(status().isOk())
+		mockMvc.perform(get(getBaseUrl()).param("page", "0").accept(SUPPORTED_CONTENT_TYPE)).andExpect(status().isOk())
+				.andDo(MockMvcResultHandlers.print()).andExpect(jsonPath("$.data").exists());
+	}
+
+	@Test
+	public void testFindGroupsByStatusActive() throws Exception {
+		mockMvc.perform(get(getBaseUrl().concat("/status")).param("page", "0").accept(SUPPORTED_CONTENT_TYPE)).andExpect(status().isOk())
+				.andDo(MockMvcResultHandlers.print()).andExpect(jsonPath("$.data").exists());
+	}
+
+	@Test
+	public void testFindGroupsByStatusInActive() throws Exception {
+		mockMvc.perform(get(getBaseUrl().concat("/status/false")).param("page", "0").accept(SUPPORTED_CONTENT_TYPE)).andExpect(status().isOk())
 				.andDo(MockMvcResultHandlers.print()).andExpect(jsonPath("$.data").exists());
 	}
 

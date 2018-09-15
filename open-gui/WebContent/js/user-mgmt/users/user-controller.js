@@ -18,7 +18,7 @@
 		if($stateParams.role != undefined) {
 		    //$scope.selectedRole = true;
 		    $scope.selectedRole = {
-			value: $stateParams.role
+		    	value: $stateParams.role
 		    };
 		}
 		if($stateParams.role == undefined) {

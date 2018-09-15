@@ -30,6 +30,11 @@ public class GroupASImpl extends BaseASImpl implements GroupAS {
 	}
 
 	@Override
+	public List<Group> findGroupsByStatus(Boolean status) {
+		return groupRepository.findByIsValid(status);
+	}
+
+	@Override
 	public Group findGroupById(Long id) {
 		return returnIfEntityExists(id, groupRepository);
 	}

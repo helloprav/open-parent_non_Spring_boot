@@ -43,8 +43,7 @@ public class GroupServiceImpl extends BaseServiceImpl implements GroupService {
 
 	@Override
 	public List<GroupVO> findGroupsByStatus(Boolean status) {
-		// TODO Auto-generated method stub
-		return null;
+		return groupAdaptor.toGroupVO(groupAS.findGroupsByStatus(status));
 	}
 
 	@Override

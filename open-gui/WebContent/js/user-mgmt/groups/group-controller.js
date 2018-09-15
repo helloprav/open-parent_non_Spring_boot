@@ -12,6 +12,13 @@
 		$scope.displayedCollection = [].concat($scope.entityList);
 		$scope.functions = functionFactory.allFunctionList;
 
+		// change value for status into boolean (true/false)
+		if ($stateParams.status != undefined) {
+			$scope.selectedStatus = {
+				value : $stateParams.status
+			};
+		}
+
 		var groupFunctions = $scope.group.functionList;
 		console.log('group: '+ JSON.stringify($scope.group));
 		$scope.functionids = [];

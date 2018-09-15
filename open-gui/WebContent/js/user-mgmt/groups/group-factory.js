@@ -36,13 +36,15 @@ angular.module('routerApp')
 			})*/
 		};
 
-		o.getAll = function() {
+		o.getAll = function(status) {
 			console.log('getting all groups');
-	    	var url = userMgmtCtx+"/groups";
+
+	    	var url = userMgmtCtx+"/groups/status/"+status;
+			console.log('getting all groups for status: '+status);
 		    return $http.get(url).then(function successCallback(res) {
 		    	    // this callback will be called asynchronously
 		    	    // when the response is available
-		    		console.log('response:: '+JSON.stringify(res.data.data));
+		    		//console.log('response:: '+JSON.stringify(res.data.data));
 					angular.copy(res.data, o.entityList);
 		    	  }, function errorCallback(response) {
 		    	    // called asynchronously if an error occurs
@@ -64,7 +66,7 @@ angular.module('routerApp')
 			    // this callback will be called asynchronously
 			    // when the response is available
 				o.setAlert("success", "Successfully created group!");
-				$state.go('group-mgmt.groups.list');
+				$state.go('group-mgmt.groups-list');
 			  }, function errorCallback(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
@@ -91,7 +93,7 @@ angular.module('routerApp')
 				    // this callback will be called asynchronously
 				    // when the response is available
 					o.setAlert("success", "Successfully updated Group!");
-					$state.go('group-mgmt.groups.list');
+					$state.go('group-mgmt.groups-list');
 				  }, function errorCallback(response) {
 				    // called asynchronously if an error occurs
 				    // or server returns response with an error status.

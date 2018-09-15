@@ -75,16 +75,18 @@
 					aria-expanded="false">User Management</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" ui-sref="user-mgmt.users.list()">Users</a> <a
-							class="dropdown-item" ui-sref="group-mgmt.groups.list">Groups</a>
+							class="dropdown-item" ui-sref="group-mgmt.groups-list()">Groups</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Something else here</a>
 					</div></li>
-				<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
+				<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+				<li><input class="form-control mr-sm-2" type="text"
+					placeholder="Filter Data" aria-label="Search" ng-model="searchText">
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search" ng-model="searchText">
+					placeholder="Search" aria-label="Search" ng-model="search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
 			<ul class="navbar-nav mr-auto">
@@ -109,9 +111,14 @@
 	<!-- MAIN CONTENT -->
 <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-3">
 		<div class="container">
-		    <div ui-view></div>
+		    <div ui-view="leftMenu"></div>
+		</div>
+	</div>
+	<div class="col-sm-9">
+		<div class="container">
+		    <div  autoscroll="false" ui-view></div>
 		</div>
 	</div>
 </div>

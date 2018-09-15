@@ -8,6 +8,8 @@ public interface GroupAS {
 
 	List<Group> findGroups();
 
+	List<Group> findGroupsByStatus(Boolean status);
+
 	Group findGroupById(Long id);
 
 	Long createGroup(Group group);

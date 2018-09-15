@@ -9,7 +9,7 @@ function securityInterceptor($window) {
 			return config;
 		},
 		response : function(res) {
-			console.log("Success Response: "+JSON.stringify(res.data));
+			//console.log("Success Response: "+JSON.stringify(res.data));
 			return res;
 		},
 		responseError : function(res, $window) {
