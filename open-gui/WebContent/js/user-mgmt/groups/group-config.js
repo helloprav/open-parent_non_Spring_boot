@@ -135,6 +135,10 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
 		            templateUrl: 'templates/user-mgmt/groups/new.html',
 		            controller: 'GroupsController',
 		            resolve: {
+						resetPromise: ['groupFactory', '$stateParams', function(groupFactory, $stateParams) {
+						    console.log('group-mgmt.groups.new:: functionFactory.resetAll()');
+						    return groupFactory.resetAll();
+						}],
 						functionsPromise: ['functionFactory', '$stateParams', function(functionFactory, $stateParams) {
 						    console.log('group-mgmt.groups.new:: functionFactory.getAll()');
 						    return functionFactory.getAll();

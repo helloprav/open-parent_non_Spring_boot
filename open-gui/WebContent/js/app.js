@@ -1,6 +1,6 @@
 var userMgmtCtx = "/user-security-web/api";
 
-var routerApp = angular.module('routerApp', ['ui.router']);
+var routerApp = angular.module('routerApp', ['ui.router','ui.bootstrap']);
 
 routerApp.config([ '$locationProvider', function($locationProvider) {
 	// The following will remove any ! from URL (changing from #! -> #)

@@ -1,5 +1,5 @@
 <!-- https://stackoverflow.com/questions/18672452/left-align-and-right-align-within-div-in-bootstrap -->
-<div class="col-md-10 col-md-offset-1">
+<div class="col-sm-12 col-sm-offset-0">
 
 	<div class="card m-0 p-0">
 		<div class="card-header" style="background-color: #eae5ea">
@@ -12,21 +12,7 @@
 		</div>
 		<!-- end of card-body -->
 		<div class="card-footer" align="center">
-			<div class="row">
-				<div class="col col-xs-6" aria-label="Page navigation example">
-					<ul class="pagination hidden-xs pull-right justify-content-end">
-						<li class="page-item disabled"><a class="page-link" href="#"
-							tabindex="-1">Previous</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item active"><a class="page-link" href="#">2
-								<span class="sr-only">(current)</span>
-						</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a>
-						</li>
-					</ul>
-				</div>
-			</div>
+			<div class="row" ng-if="" ng-include="'templates/user-mgmt/item-footer.html'"></div>
 		</div>
 		<!-- end of card-footer -->
 	</div>
