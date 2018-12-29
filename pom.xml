@@ -69,11 +69,11 @@
 				<artifactId>open-commons-config</artifactId>
 				<version>${version.project}</version>
 			</dependency>
-			<dependency>
+			<!-- <dependency>
 				<groupId>org.openframework</groupId>
 				<artifactId>open-commons-userandsecurity</artifactId>
 				<version>${version.project}</version>
-			</dependency>
+			</dependency> -->
 
 			<!-- Servlet Dependency -->
 			<dependency>
@@ -371,7 +371,7 @@
 		<module>open-commons-rest</module>
 		<module>open-commons-jpa</module>
 		<module>open-commons-spring</module>
-		<module>open-commons-userandsecurity</module>
+		<!-- <module>open-commons-userandsecurity</module> -->
 		<module>open-commons-config</module>
 		<module>open-commons-config-stub</module>
 	</modules>
