@@ -5,10 +5,13 @@ public class AppConstants {
 	public static final String MESSAGE_TYPE_DASHBOARD = "dashboard";
 	public static final String MESSAGE_TYPE_ERRORS = "errors";
 
-	public static final String CONFIG_PATH_PROPERTY_NAME = "config";
-	public static final String APPLICATION_CONFIG_DIR = CONFIG_PATH_PROPERTY_NAME;
+	public static final String SHARED_PATH = "sharedPath";
+	public static final String APPLICATION_CONFIG_DIR = "config";
 	public static final String APPLICATION_MESSAGE_DIR = "message";
 	public static final String APPLICATION_LOG_DIR = "logs";
+
+	public static final String APPLICATION_ENV_DEV = "dev";
+	public static final String APPLICATION_ENV_PROD = "prod";
 
     public static final String APP_INITI_FILE = "appInitialization.yml";
 

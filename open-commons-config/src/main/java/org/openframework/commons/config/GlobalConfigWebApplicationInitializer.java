@@ -14,6 +14,7 @@ import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 import org.openframework.common.rest.util.YamlUtils;
 import org.openframework.commons.config.constants.AppConstants;
 import org.openframework.commons.config.servlet.SecurityServlet;
+import org.openframework.commons.config.utils.AppConfigUtils;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -43,8 +44,7 @@ public class GlobalConfigWebApplicationInitializer {//extends AbstractAnnotation
 
 		Map<String, ? extends ServletRegistration> servletReg = servletContext.getServletRegistrations();
 		System.out.println(servletReg);
-		String fileName = System.getProperty(AppConstants.CONFIG_PATH_PROPERTY_NAME).concat(File.separator)
-				.concat(AppConstants.APP_INITI_FILE);
+		String fileName = AppConfigUtils.getAppInitializerConfigFile();
 		Properties appInitializationProp = YamlUtils.loadYamlProperty(fileName);
 		String securityConfig = appInitializationProp.getProperty(AppConstants.SECURITY_CONFIG);
 

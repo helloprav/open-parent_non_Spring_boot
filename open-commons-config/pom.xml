@@ -9,7 +9,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.openframework</groupId>
 	<artifactId>open-commons-config</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>open-commons-config</name>

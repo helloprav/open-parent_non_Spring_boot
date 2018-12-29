@@ -30,4 +30,12 @@ public class FileFolderUtils {
 		});
 	}
 
+	public static boolean isDirectoryExists(String directoryPath) {
+
+		if(null == directoryPath) {
+			return false;
+		}
+		File dir = new File(directoryPath);
+		return dir.exists() && dir.isDirectory();
+	}
 }

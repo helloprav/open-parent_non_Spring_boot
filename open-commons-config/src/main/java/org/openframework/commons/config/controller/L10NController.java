@@ -8,7 +8,7 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.openframework.common.rest.constants.ApplicationConstants;
+import org.openframework.commons.config.constants.AppConstants;
 import org.openframework.commons.config.model.LanguageBean;
 import org.openframework.commons.config.service.I18nService;
 import org.slf4j.Logger;
@@ -53,7 +53,7 @@ public class L10NController {
 	@RequestMapping(method = RequestMethod.GET, value = "/messages", produces = { "application/json" })
 	public @ResponseBody Map<String, String> getMessages(HttpServletRequest request) {
 		final Locale locale = localeResolver.resolveLocale(request);
-		return getMessagesFromTypeAndLocale(ApplicationConstants.MESSAGE_TYPE_DASHBOARD, locale.getLanguage());
+		return getMessagesFromTypeAndLocale(AppConstants.MESSAGE_TYPE_DASHBOARD, locale.getLanguage());
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/messages/{messageType}")

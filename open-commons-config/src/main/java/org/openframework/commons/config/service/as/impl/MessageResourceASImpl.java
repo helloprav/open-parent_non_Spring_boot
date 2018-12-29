@@ -27,13 +27,13 @@ import org.openframework.commons.config.model.LanguageBean;
 import org.openframework.commons.config.model.MessageResourceLocale;
 import org.openframework.commons.config.service.I18nService;
 import org.openframework.commons.config.service.as.MessageResourceAS;
+import org.openframework.commons.config.utils.AppConfigUtils;
 import org.openframework.commons.utils.FileFolderUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
-
 
 /**
  * @author its_me
@@ -51,6 +51,7 @@ public class MessageResourceASImpl implements MessageResourceAS {
 	public MessageResourceASImpl() {
 		System.out.println("MessageResourceASImpl() called");
 	}
+
 	/**
 	 * Service Initialization
 	 */
@@ -77,11 +78,12 @@ public class MessageResourceASImpl implements MessageResourceAS {
 					if (languageList.contains(propertiesMapLanguage)) {
 						languageList.remove(propertiesMapLanguage);
 					} else {
-						logger.error("The Properties of type {} is NOT supported for language {}", messageEntry.getKey(),
-								propertiesMapLanguage);
+						logger.error("The Properties of type {} is NOT supported for language {}",
+								messageEntry.getKey(), propertiesMapLanguage);
 					}
 				}
-				logger.error("No properties of languages {} found for the type {}", languageList, messageEntry.getKey());
+				logger.error("No properties of languages {} found for the type {}", languageList,
+						messageEntry.getKey());
 			}
 		}
 	}
@@ -108,10 +110,13 @@ public class MessageResourceASImpl implements MessageResourceAS {
 
 		for (File file : globalPropertyFileList) {
 			final String fileName = file.getName();
-			StringBuilder filePath = new StringBuilder();
-			filePath.append(System.getProperty(AppConstants.CONFIG_PATH_PROPERTY_NAME))
-					.append(AppConstants.URL_CONTEXT_ROOT).append(fileName);
-			yaml.setResources(new FileSystemResource(new File(filePath.toString())));
+			/*
+			 * StringBuilder filePath = new StringBuilder();
+			 * filePath.append(System.getProperty(AppConstants.SHARED_PATH))
+			 * .append(AppConstants.URL_CONTEXT_ROOT).append(fileName);
+			 * yaml.setResources(new FileSystemResource(new File(filePath.toString())));
+			 */
+			yaml.setResources(new FileSystemResource(file));
 			final Properties props = yaml.getObject();
 			appConfigsMap.put(FilenameUtils.removeExtension(fileName).toUpperCase(), props);
 		}
@@ -200,9 +205,9 @@ public class MessageResourceASImpl implements MessageResourceAS {
 
 	private File[] getMessagePropertyFileList() {
 
-		String messageConfigDir = System.getProperty(AppConstants.CONFIG_PATH_PROPERTY_NAME) + File.separator
+		String messageConfigDir = System.getProperty(AppConstants.SHARED_PATH) + File.separator
 				+ AppConstants.APPLICATION_MESSAGE_DIR;
-		System.out.println("messageConfigDir: "+messageConfigDir);
+		System.out.println("messageConfigDir: " + messageConfigDir);
 		final File dir = new File(messageConfigDir);
 		return dir.listFiles(new FilenameFilter() {
 
@@ -221,8 +226,7 @@ public class MessageResourceASImpl implements MessageResourceAS {
 	 */
 	private File[] getGlobalPropertyFileList() {
 
-		String messageConfigDir = System.getProperty(AppConstants.CONFIG_PATH_PROPERTY_NAME);
-		final File dir = new File(messageConfigDir);
+		final File dir = new File(AppConfigUtils.getConfigPath());
 		return dir.listFiles((dir1, name) -> name.toLowerCase().endsWith(".yml"));
 	}
 

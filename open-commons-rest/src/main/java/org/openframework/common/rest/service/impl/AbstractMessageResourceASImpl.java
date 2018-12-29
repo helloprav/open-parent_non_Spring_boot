@@ -35,6 +35,8 @@ import org.springframework.core.io.FileSystemResource;
  * @author its_me
  *
  */
+
+// TODO: Check and Delete this file and related files
 public class AbstractMessageResourceASImpl implements MessageResourceAS {
 
 	private static final Logger logger = LoggerFactory.getLogger(AbstractMessageResourceASImpl.class);
@@ -70,9 +72,9 @@ public class AbstractMessageResourceASImpl implements MessageResourceAS {
 				for (File innerFile : listFiles) {
 					saveProperies(file, innerFile, messageResourceLocale, newSupportedLanguages);
 				}
-				if (ApplicationConstants.MESSAGE_TYPE_DASHBOARD.equalsIgnoreCase(file.getName())) {
+				/*if (ApplicationConstants.MESSAGE_TYPE_DASHBOARD.equalsIgnoreCase(file.getName())) {
 					supportedLanguages.addAll(newSupportedLanguages);
-				}
+				}*/
 				messageResourceMapTemp.put(file.getName(), messageResourceLocale);
 			}
 		}
@@ -86,7 +88,7 @@ public class AbstractMessageResourceASImpl implements MessageResourceAS {
 		Properties props = FileFolderUtils.loadPropFromFile(innerFile);
 		String localeCode = getLocale(innerFile.getName())[1];
 		messageResourceLocale.getPropertiesMap().put(localeCode, props);
-		if (!ApplicationConstants.DEFAULT.equals(localeCode)
+		/*if (!ApplicationConstants.DEFAULT.equals(localeCode)
 				&& ApplicationConstants.MESSAGE_TYPE_DASHBOARD.equalsIgnoreCase(file.getName())) {
 
 			// add above supported language/localeCode in a list
@@ -99,7 +101,7 @@ public class AbstractMessageResourceASImpl implements MessageResourceAS {
 			Locale languageLocale = new Locale(localeCode);
 			LanguageBean toAdd = new LanguageBean(languageName, languageLocale.getLanguage(), nameAsImg);
 			newSupportedLanguages.add(toAdd);
-		}
+		}*/
 	}
 
 	private void initAppConfig() {
@@ -111,7 +113,7 @@ public class AbstractMessageResourceASImpl implements MessageResourceAS {
 		for (File file : globalPropertyFileList) {
 			final String fileName = file.getName();
 			StringBuilder filePath = new StringBuilder();
-			filePath.append(getSharedLocation()).append(fileName);
+			//filePath.append(getSharedLocation()).append(fileName);
 			yaml.setResources(new FileSystemResource(new File(file.getPath())));
 			final Properties props = yaml.getObject();
 			appConfigsMap.put(FilenameUtils.removeExtension(fileName).toUpperCase(), props);
@@ -125,7 +127,7 @@ public class AbstractMessageResourceASImpl implements MessageResourceAS {
 				.iterator();
 		while (messageEntrySetIterator.hasNext()) {
 			Entry<String, MessageResourceLocale> messageEntry = messageEntrySetIterator.next();
-			if (!ApplicationConstants.MESSAGE_TYPE_DASHBOARD.equals(messageEntry.getKey())) {
+			/*if (!ApplicationConstants.MESSAGE_TYPE_DASHBOARD.equals(messageEntry.getKey())) {
 
 				Map<String, Properties> propertiesMap = messageEntry.getValue().getPropertiesMap();
 				Iterator<String> propertiesMapIterator = propertiesMap.keySet().iterator();
@@ -140,17 +142,12 @@ public class AbstractMessageResourceASImpl implements MessageResourceAS {
 				}
 				logger.error("No properties of languages {} found for the type {}", languageList,
 						messageEntry.getKey());
-			}
+			}*/
 		}
 	}
 
 	public boolean containsName(final List<LanguageBean> list, final String name) {
 		return list.stream().anyMatch(o -> o.getLocale().equals(name));
-	}
-
-	private String getSharedLocation() {
-
-		return System.getProperty(ApplicationConstants.CONFIG_PATH_PROPERTY_NAME).concat(File.separator);
 	}
 
 	/**
@@ -183,7 +180,8 @@ public class AbstractMessageResourceASImpl implements MessageResourceAS {
 
 	private File[] getMessagePropertyFileList() {
 
-		String messageResourceDir = getSharedLocation().concat(ApplicationConstants.APPLICATION_MESSAGE_DIR);
+		String messageResourceDir = "";
+		//String messageResourceDir = getSharedLocation().concat(ApplicationConstants.APPLICATION_MESSAGE_DIR);
 		return FileFolderUtils.getMessagePropertyFileList(messageResourceDir);
 	}
 
@@ -195,7 +193,8 @@ public class AbstractMessageResourceASImpl implements MessageResourceAS {
 	 */
 	private File[] getGlobalPropertyFileList() {
 
-		String globalConfigDir = getSharedLocation().concat(ApplicationConstants.APPLICATION_CONFIG_DIR);
+		String globalConfigDir = "";
+		//String globalConfigDir = getSharedLocation().concat(ApplicationConstants.APPLICATION_CONFIG_DIR);
 		final File dir = new File(globalConfigDir);
 		return dir.listFiles((dir1, name) -> name.toLowerCase().endsWith(".yml"));
 	}
