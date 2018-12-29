@@ -1,7 +1,0 @@
-=========================COMPLETED======================================================================
-1. Store (JWT/Complete User Details JSON) as CookieValue
-2. Stateless Security Filter - check jwt present and not expired, otherwise status code = 401
-3. Profile Argument Resolver - decrypt the JWT payload and populate userProfile
-4. Optional - Authorization: Check the required access @Controller Method and if userProfile has it
-========================================================================================================
-6. All services to be HTTPS secured
